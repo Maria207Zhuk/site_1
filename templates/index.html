@@ -1,0 +1,42 @@
+
+<!DOCTYPE html> 
+<html> 
+    <head> 
+        <meta charset="UTF-8" /> 
+        <meta name="viewport" content="width=device-width; initial-scale=1.0" /> 
+        <title>Мої фільми</title> 
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.5.0/dist/semantic.min.css"> 
+        <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.5.0/dist/semantic.min.js"></script> 
+    </head> 
+    <body> 
+        <div style="margin-top: 16px" class="ui container"> 
+            <h1 class="ui center aligned header">Мої фільми</h1> 
+ 
+            <div class="ui clearing segment"> 
+                <form class="ui form" action="/add" method="post"> 
+                    <div class="ui field"> 
+                        <label for="title">Назва фільму</label> 
+                        <input type="text" name="title" placeholder="Введіть назву фільму..." /> 
+                        <button style="margin-top: 8px" class="ui right floated black button" type="submit">Добавити</button> 
+                    </div> 
+                </form> 
+            </div> 
+ 
+            {% for movie in movies %} 
+            <div class="ui segment"> 
+                <p class="ui big header"> 
+                    {{ movie.title }} 
+                    {% if movie.seen == True %} 
+                        <span class="ui green label">Переглянуто</span> 
+                    {% else %} 
+                        <span class="ui gray label">Не переглянуто</span> 
+                    {% endif %} 
+                </p> 
+ 
+                <a class="ui blue button" href="/update/{{ movie.id }}">Оновити статус</a> 
+                <a class="ui red button" href="/delete/{{ movie.id }}">Видалити</a> 
+            </div> 
+            {% endfor %} 
+        </div> 
+    </body> 
+</html>
